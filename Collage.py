@@ -44,7 +44,6 @@ for imagename in imagelist:
 	xoffset += width + borderwidth
 
 requiredheight = math.ceil((row+1) * newheight + (row+1)*borderwidth)
-print "Required height: " + str(requiredheight) 
 
 blank_image = Image.new("RGB", (maxwidth, int(requiredheight)), backgroundcolour)
 
@@ -57,8 +56,9 @@ for imagename in imagelist:
 	if xoffset + width + borderwidth > maxwidth:
 		row += 1
 		xoffset = 0
-	print "Pasting to: " + str(xoffset) + "," + str(int(row*newheight) + (row+1)*borderwidth )
 	blank_image.paste(im, ( xoffset + borderwidth, int(row*newheight + (row+1)*borderwidth) ))
 	xoffset += width + borderwidth
 
 blank_image.save(outputdir + 'collage.jpg', "JPEG")
+
+print str(count) + " images processed."
