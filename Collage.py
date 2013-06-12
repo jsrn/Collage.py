@@ -3,35 +3,33 @@ import os
 from PIL import Image
 import math
 
-outputdir = ''
+def get_mean_height( images ):
+	total = 0
+	for im in images:
+		total += im.size[1]
+	return int(total / len(images))
+
 backgroundcolour = (209, 175, 121)
 borderwidth = 2;
+maxwidth = 1200
 
 imagelist = os.listdir("images")
-count = len(imagelist)
 
 oldimages = []
 newimages = []
 
-heighttotal = 0
 for imagename in imagelist:
-	im = Image.open("images/" + imagename)
-	width, height = im.size
-	heighttotal += height
-	oldimages.append(im)
+	oldimages.append( Image.open("images/" + imagename) )
 
-newheight = heighttotal / count
+newheight = get_mean_height( oldimages )
 
-for imagename in imagelist:
-	im = Image.open("images/" + imagename)
+for im in oldimages:
 	width, height = im.size
 	modifier = newheight / height
 	newwidth = width * modifier
 	newsize = newwidth, newheight
 	im = im.resize((int(newwidth), int(newheight)), Image.ANTIALIAS)
 	newimages.append(im)
-
-maxwidth = 800
 
 blank_image = Image.new("RGB", (maxwidth, 200), backgroundcolour)
 
@@ -54,6 +52,6 @@ for im in newimages:
 	blank_image.paste(im, ( xoffset + borderwidth, int(row*newheight + (row+1)*borderwidth) ))
 	xoffset += width + borderwidth
 
-blank_image.save(outputdir + 'collage.jpg', "JPEG")
+blank_image.save( 'collage.png', "PNG" )
 
-print str(count) + " images processed."
+print str( len( oldimages ) ) + " images processed."
