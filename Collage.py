@@ -11,7 +11,7 @@ def get_mean_height( images ):
 
 backgroundcolour = (209, 175, 121)
 borderwidth = 2;
-maxwidth = 1200
+maxwidth = 1000
 
 imagelist = os.listdir("images")
 
