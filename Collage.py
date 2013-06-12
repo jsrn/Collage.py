@@ -4,6 +4,8 @@ from PIL import Image
 import math
 
 outputdir = 'out/'
+backgroundcolour = (209, 175, 121)
+borderwidth = 2;
 
 imagelist = os.listdir("images")
 count = len(imagelist)
@@ -20,7 +22,8 @@ newheight = heighttotal / count
 for imagename in imagelist:
 	im = Image.open("images/" + imagename)
 	width, height = im.size
-	newwidth = (height / newheight) * width
+	modifier = newheight / height
+	newwidth = width * modifier
 	newsize = newwidth, newheight
 	im = im.resize((int(newwidth), int(newheight)), Image.ANTIALIAS)
 	im.save(outputdir + imagename, "JPEG")
@@ -30,33 +33,32 @@ for imagename in imagelist:
 # Calculate how much space we need
 maxwidth = 800
 row = 0
-xoffset = 0
+xoffset = borderwidth
 
 for imagename in imagelist:
 	im = Image.open("out/" + imagename)
 	width, height = im.size
-	if xoffset + width > maxwidth:
+	if xoffset + width + borderwidth > maxwidth:
 		row += 1
 		xoffset = 0
-	else:
-		xoffset += width
+	xoffset += width + borderwidth
 
-requiredheight = math.ceil(row * newheight)
+requiredheight = math.ceil((row+1) * newheight + (row+1)*borderwidth)
 print "Required height: " + str(requiredheight) 
 
-blank_image = Image.new("RGB", (maxwidth, int(requiredheight)))
+blank_image = Image.new("RGB", (maxwidth, int(requiredheight)), backgroundcolour)
 
 row = 0
-xoffset = 0
+xoffset = borderwidth
 
 for imagename in imagelist:
 	im = Image.open("out/" + imagename)
 	width, height = im.size
-	if xoffset + width > maxwidth:
+	if xoffset + width + borderwidth > maxwidth:
 		row += 1
 		xoffset = 0
-	print "Pasting to: " + str(xoffset) + "," + str(int(row*newheight))
-	blank_image.paste(im, ( xoffset, int(row*newheight) ))
-	xoffset += width
+	print "Pasting to: " + str(xoffset) + "," + str(int(row*newheight) + (row+1)*borderwidth )
+	blank_image.paste(im, ( xoffset + borderwidth, int(row*newheight + (row+1)*borderwidth) ))
+	xoffset += width + borderwidth
 
 blank_image.save(outputdir + 'collage.jpg', "JPEG")
