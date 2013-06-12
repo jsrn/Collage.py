@@ -3,19 +3,22 @@ import os
 from PIL import Image
 import math
 
-outputdir = 'out/'
+outputdir = ''
 backgroundcolour = (209, 175, 121)
 borderwidth = 2;
 
 imagelist = os.listdir("images")
 count = len(imagelist)
 
+oldimages = []
+newimages = []
+
 heighttotal = 0
 for imagename in imagelist:
 	im = Image.open("images/" + imagename)
 	width, height = im.size
 	heighttotal += height
-
+	oldimages.append(im)
 
 newheight = heighttotal / count
 
@@ -26,7 +29,7 @@ for imagename in imagelist:
 	newwidth = width * modifier
 	newsize = newwidth, newheight
 	im = im.resize((int(newwidth), int(newheight)), Image.ANTIALIAS)
-	im.save(outputdir + imagename, "JPEG")
+	newimages.append(im)
 
 maxwidth = 800
 
@@ -35,8 +38,7 @@ blank_image = Image.new("RGB", (maxwidth, 200), backgroundcolour)
 row = 0
 xoffset = borderwidth
 
-for imagename in imagelist:
-	im = Image.open("out/" + imagename)
+for im in newimages:
 	width, height = im.size
 
 	if xoffset + width + borderwidth > maxwidth:
