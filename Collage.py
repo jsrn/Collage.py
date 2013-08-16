@@ -34,7 +34,7 @@ for im in oldimages:
 blank_image = Image.new("RGB", (maxwidth, 200), backgroundcolour)
 
 row = 0
-xoffset = borderwidth
+xoffset = 0
 
 for im in newimages:
 	width, height = im.size
