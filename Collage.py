@@ -27,7 +27,7 @@ def prep_args():
 	return parser.parse_args()
 
 # defaults
-backgroundcolour = (209, 175, 121)
+backgroundcolour = (56, 56, 56)
 borderwidth = 2
 maxwidth = 1200
 # end defaults
