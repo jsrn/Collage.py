@@ -1,6 +1,6 @@
 # Collage.py
 
-Collage.py was created when I needed to quickly produce compilations of cropped game screenshots. When executed, Collage.py will quickly produce a tiled collage of all images within the `images` folder. Images will be scaled to the average (mean) height of the images, so it is best that the screenshots are of roughly equal size.
+Collage.py was created when I needed to quickly produce compilations of cropped game screenshots. When executed, Collage.py will quickly produce a tiled collage of all images within the `images/` folder. Images will be scaled to the average (mean) height of all images in the folder, so it is best that the screenshots are of roughly equal height.
 
 #### Usage
 
