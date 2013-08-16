@@ -1,13 +1,12 @@
 from __future__ import division
-import os
+import os, math, argparse
 from PIL import Image
-import math
 
 def trim( image ):
 	width, height = image.size
 	clearRow = True
 	for i in xrange( height ):
-		r, g, b = image.getpixel( ( width - 3, i ) )
+		r, g, b = image.getpixel( ( width - (borderwidth + 1), i ) )
 		if r is not 209 or g is not 175 or b is not 121:
 			clearRow = False
 	if clearRow is True:
@@ -21,9 +20,24 @@ def get_mean_height( images ):
 		total += im.size[1]
 	return int(total / len(images))
 
+# defaults
 backgroundcolour = (209, 175, 121)
 borderwidth = 2
 maxwidth = 1200
+# end defaults
+
+# parse args
+parser = argparse.ArgumentParser()
+parser.add_argument('--border-width', help="The width (in pixels) of the border between images and around the collage.")
+parser.add_argument('--collage-width', help="The maximum width (in pixels) of the collage.")
+args = parser.parse_args()
+
+if args.border_width is not None:
+	borderwidth = int( args.border_width )
+
+if args.collage_width is not None:
+	maxwidth = int( args.collage_width )
+# end arg parsing
 
 imagelist = os.listdir("images")
 
