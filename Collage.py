@@ -3,6 +3,18 @@ import os
 from PIL import Image
 import math
 
+def trim( image ):
+	width, height = image.size
+	clearRow = True
+	for i in xrange( height ):
+		r, g, b = image.getpixel( ( width - 3, i ) )
+		if r is not 209 or g is not 175 or b is not 121:
+			clearRow = False
+	if clearRow is True:
+		return trim ( image.crop( ( 0, 0, width - 1, height ) ) )
+	else:
+		return image
+
 def get_mean_height( images ):
 	total = 0
 	for im in images:
@@ -51,6 +63,8 @@ for im in newimages:
 
 	blank_image.paste(im, ( xoffset + borderwidth, int(row*newheight + (row+1)*borderwidth) ))
 	xoffset += width + borderwidth
+
+blank_image = trim( blank_image )
 
 blank_image.save( 'collage.png', "PNG" )
 
