@@ -21,10 +21,9 @@ optional arguments:
 ```
 
 #### Dependencies
-Python 2.7  
-[Python Imaging Library](http://www.pythonware.com/library/pil/handbook/index.htm)
 
-This project was created for personal use in quickly producing a collage of game screenshots, but I guess it has lots of other uses.
+ * [Python 2.7](http://python.org/download/)
+ * [Python Imaging Library](http://www.pythonware.com/library/pil/handbook/index.htm)
 
 #### License
 
