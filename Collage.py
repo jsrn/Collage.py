@@ -7,8 +7,8 @@ def trim( image ):
 	clearRow = True
 	desiredr, desiredg, desiredb = backgroundcolour
 	for i in xrange( height ):
-		r, g, b = image.getpixel( ( width - (borderwidth + 1), i ) )
-		if r is not desiredr or g is not desiredg or b is not desiredb:
+		rgb = image.getpixel( ( width - (borderwidth + 1), i ) )
+		if rgb != backgroundcolour:
 			clearRow = False
 	if clearRow is True:
 		return trim ( image.crop( ( 0, 0, width - 1, height ) ) )
