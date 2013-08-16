@@ -1,6 +1,11 @@
 # Collage.py
 
-Given a folder of images, quickly produce a collage of these images. Work in progress.
+Collage.py was created when I needed to quickly produce compilations of cropped game screenshots. When executed, Collage.py will quickly produce a tiled collage of all images within the `images` folder. Images will be scaled to the average (mean) height of the images, so it is best that the screenshots are of roughly equal size.
+
+#### Usage
+
+ 1. Place images in `images/` folder
+ 2. Run `Collage.py`
 
 #### Dependencies
 Python 2.7  
@@ -8,12 +13,7 @@ Python 2.7
 
 This project was created for personal use in quickly producing a collage of game screenshots, but I guess it has lots of other uses.
 
-## Usage
-
- 1. Place images in `images/` folder
- 2. Run `Collage.py`
-
-## License
+#### License
 
 The MIT License (MIT)
 
