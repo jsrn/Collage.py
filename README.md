@@ -7,6 +7,17 @@ Collage.py was created when I needed to quickly produce compilations of cropped 
  1. Place images in `images/` folder
  2. Run `Collage.py`
 
+	usage: Collage.py [-h] [--border-width BORDER_WIDTH]
+	                  [--collage-width COLLAGE_WIDTH]
+
+	optional arguments:
+	  -h, --help            show this help message and exit
+	  --border-width BORDER_WIDTH
+	                        The width (in pixels) of the border between images and
+	                        around the collage.
+	  --collage-width COLLAGE_WIDTH
+	                        The maximum width (in pixels) of the collage.
+
 #### Dependencies
 Python 2.7  
 [Python Imaging Library](http://www.pythonware.com/library/pil/handbook/index.htm)
