@@ -43,7 +43,7 @@ for im in newimages:
 		row += 1
 		xoffset = 0
 
-	requiredheight = int(math.ceil((row+1) * newheight + (row+1)*borderwidth))
+	requiredheight = int(math.ceil((row+1) * newheight + (row+1)*borderwidth + borderwidth))
 	if blank_image.size[1] < requiredheight:
 		new_blank_image = Image.new("RGB", (maxwidth, requiredheight), backgroundcolour)
 		new_blank_image.paste(blank_image, (0,0));
