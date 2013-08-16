@@ -5,9 +5,10 @@ from PIL import Image
 def trim( image ):
 	width, height = image.size
 	clearRow = True
+	desiredr, desiredg, desiredb = backgroundcolour
 	for i in xrange( height ):
 		r, g, b = image.getpixel( ( width - (borderwidth + 1), i ) )
-		if r is not 209 or g is not 175 or b is not 121:
+		if r is not desiredr or g is not desiredg or b is not desiredb:
 			clearRow = False
 	if clearRow is True:
 		return trim ( image.crop( ( 0, 0, width - 1, height ) ) )
