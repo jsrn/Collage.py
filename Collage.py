@@ -20,6 +20,12 @@ def get_mean_height( images ):
 		total += im.size[1]
 	return int(total / len(images))
 
+def prep_args():
+	parser = argparse.ArgumentParser()
+	parser.add_argument('--border-width', help="The width (in pixels) of the border between images and around the collage.")
+	parser.add_argument('--collage-width', help="The maximum width (in pixels) of the collage.")
+	return parser.parse_args()
+
 # defaults
 backgroundcolour = (209, 175, 121)
 borderwidth = 2
@@ -27,10 +33,7 @@ maxwidth = 1200
 # end defaults
 
 # parse args
-parser = argparse.ArgumentParser()
-parser.add_argument('--border-width', help="The width (in pixels) of the border between images and around the collage.")
-parser.add_argument('--collage-width', help="The maximum width (in pixels) of the collage.")
-args = parser.parse_args()
+args = prep_args()
 
 if args.border_width is not None:
 	borderwidth = int( args.border_width )
@@ -40,9 +43,7 @@ if args.collage_width is not None:
 # end arg parsing
 
 imagelist = os.listdir("images")
-
-oldimages = []
-newimages = []
+oldimages, newimages = [], []
 
 for imagename in imagelist:
 	oldimages.append( Image.open("images/" + imagename) )
@@ -59,8 +60,7 @@ for im in oldimages:
 
 blank_image = Image.new("RGB", (maxwidth, 200), backgroundcolour)
 
-row = 0
-xoffset = 0
+row, xoffset = 0, 0
 
 for im in newimages:
 	width, height = im.size
